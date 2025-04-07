@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Dark Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  line-height: 1.6;
+}
+
+    /* Navbar styles */
+    .navbar {
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  padding: 16px 24px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+    .navbar .logo {
+  font-size: 32px; /* Larger font size */
+  color: #000000;
+  font-family: 'Pacifico', cursive; 
+}
+.navbar .logo i {
+  color: #00B0FF;
+  font-size: 35px; 
+}
+
+    .navbar .menu {
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar .menu a {
+      color: #000000;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar .menu a:hover {
+      color: #00B0FF;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 30px;
+      height: 4px;
+      color: #fff;
+      background-color: rgb(0, 0, 0);
+      border-radius: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar .menu {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 24px;
+        border: 3px solid #00B0FF;
+        background-color: #ffffff;
+        width: 220px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+        border-radius: 6px;
+        padding: 0 12px;
+        pointer-events: none;
+      }
+
+      .navbar .menu.active {
+        max-height: 500px;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 12px;
+        pointer-events: auto;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Product Section */
+    .product-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .product-section h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #00B0FF;
+    }
+
+    .product-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-card {
+  background: #2b2b2b0f;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid #00B0FF;
+}
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(121, 120, 120, 0.3);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 12px 0 8px;
+      font-size: 18px;
+      color: #000000;
+    }
+
+    .product-card .price {
+      font-weight: bold;
+      color: #6e6d6d;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #1ebe5d;
+    }
+
+/* review section */
+.customer-reviews {
+  background-color: #d1cccc11;
+  padding: 40px 20px;
+  text-align: center;
+  color: #000000;
+}
+
+.customer-reviews h2 {
+  color: #00B0FF;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.review-container {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.review-card {
+  background: #acaaaa09;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 7px rgba(137, 136, 136, 0.2);
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+}
+
+.customer-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.customer-img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.customer-details {
+  text-align: left;
+}
+
+.rating {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.star {
+  color: #FFD700; /* Gold color for the stars */
+  font-size: 22px;
+}
+
+.star:hover {
+  color: #FFB800; /* Slightly lighter gold on hover */
+}
+
+.review-card p {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.review-card p:last-child {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .customer-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .customer-img {
+    margin-bottom: 10px;
+  }
+
+  .customer-details {
+    text-align: center;
+  }
+}
+
+
+    /* Footer Styles */
+    .footer {
+  background-color: #1f1f1f0f;
+  padding: 60px 30px;
+  text-align: center;
+  color: #000000;
+  font-size: 20px;
+  line-height: 1.8;
+  width: 100%;
+  position: relative;
+  left: 0;
+}
+.footer .llo{
+    font-size: 32px; /* Larger font size */
+  color: #00B0FF;
+  font-family: 'Pacifico', cursive; 
+}
+.footer p {
+  margin: 15px 0; 
+}
+
+.footer .footer-link {
+  color: #00B0FF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer .footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer .footer-rights {
+  font-size: 18px; 
+  margin-top: 25px; 
+  color: #888;
+  font-weight: normal;
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-glasses"></i> <!-- Frame icon from Font Awesome -->
+        Brimx Frames
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="menu" id="menu">
+      <a href="#">Home</a>
+      <a href="#rview">About</a>
+      <a href="#foo">Contact</a>
+    </div>
+  </nav>
+
+  <section class="product-section">
+    <h1>Available Glasses</h1>
+    <div class="product-grid">
+      
+      <div class="product-card">
+        <img src="Clas.JPG" alt="Classic Round Glasses" />
+        <h3>Classic Half Frame PhotoChromic Glasses</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Classic%20Round%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+      
+      <div class="product-card">
+        <img src="Retro.JPG" alt="Blue Frame Glasses" />
+        <h3>Retro fashion anti blue light glasses</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Blue%20Frame%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+      
+      <div class="product-card">
+        <img src="Photoch.JPG" />
+        <h3>Photochromic Glasses Half Frame</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Modern%20Square%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+  
+      <div class="product-card">
+        <img src="Black.JPG" alt="Retro Sunglasses" />
+        <h3>Black Computer Glasses Frame Anti Blue</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Retro%20Sunglasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+  
+      <div class="product-card">
+        <img src="Lad.jpg" alt="Stylish Cat-Eye Glasses" />
+        <h3>Metal Anti Blue Light Glasses Women</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Stylish%20Cat-Eye%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+  
+      <div class="product-card">
+        <img src="Cat.JPG" alt="Oval Frame Glasses" />
+        <h3>Cat Eye Anti Blue Light Glasses</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Oval%20Frame%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+  
+      <div class="product-card">
+        <img src="Simple .JPG" alt="Sleek Black Glasses" />
+        <h3>Simple Fashion Anti Blue Glasses</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 8 -->
+      <div class="product-card">
+        <img src="Vintage .jpg" alt="Sleek Black Glasses" />
+        <h3>Fashion Vintage Photochromic Glasses</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 9 -->
+      <div class="product-card">
+        <img src="blue .png" alt="Sleek Black Glasses" />
+        <h3>Anti Blue Glasses for Men Women</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 10 -->
+      <div class="product-card">
+        <img src="Fas10.jpg" alt="Sleek Black Glasses" />
+        <h3>Fashion Anti Blue Glasses</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 11 -->
+      <div class="product-card">
+        <img src="Klas11.png" alt="Sleek Black Glasses" />
+        <h3>Retro Round Blue Light Computer Glasses</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 12 -->
+      <div class="product-card">
+        <img src="Retro12.jpg" alt="Sleek Black Glasses" />
+        <h3>New Fashion Square Reading Glasses Retro</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 13 -->
+      <div class="product-card">
+        <img src="Cat13.jpg" alt="Sleek Black Glasses" />
+        <h3>New Cat Eye Photochromic Glasses</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 14 -->
+      <div class="product-card">
+        <img src="Vin14.jpg" alt="Sleek Black Glasses" />
+        <h3>Fashion Anti Blue Glasses Women</h3>
+        <p class="price">₵110</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <!-- item 15 -->
+      <div class="product-card">
+        <img src="Cat15.jpg" alt="Sleek Black Glasses" />
+        <h3>Fashion Vintage Cat Eye PhotoChromic Glasses</h3>
+        <p class="price">₵130</p>
+        <a 
+          href="https://wa.me/233240832129?text=Hello%2C%20I'm%20interested%20in%20the%20Sleek%20Black%20Glasses." 
+          target="_blank" 
+          class="whatsapp-btn"
+        >
+          Order on WhatsApp
+        </a>
+      </div>
+
+
+      <!-- review section -->
+      <section class="customer-reviews" id="rview">
+        <h2>What Our Customers Are Saying</h2>
+        <div class="review-container">
+          <!-- Customer 1 -->
+          <div class="review-card">
+            <div class="customer-info">
+              <img src="Cath.jpg" alt="Michael Johnson" class="customer-img" />
+              <div class="customer-details">
+                <p>- Catherine</p>
+                <div class="rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                </div>
+              </div>
+            </div>
+            <p>"I love the quality of the frames, it feels sturdy but lightweight and they fit perfectly without needing adjustments. Exactly what i was looking for."</p>
+          </div>
+      
+          <!-- Customer 2 -->
+          <div class="review-card">
+            <div class="customer-info">
+              <img src="ibrahim.jpg" alt="Emily Clark" class="customer-img" />
+              <div class="customer-details">
+                <p>- Ibrahim</p>
+                <div class="rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9734;</span>
+                </div>
+              </div>
+            </div>
+            <p>"Great style, comfort, and price! Highly recommend Brimx Frames for anyone looking for quality glasses."</p>
+          </div>
+      
+          <!-- Customer 3 -->
+          <div class="review-card">
+            <div class="customer-info">
+              <img src="mispah.jpg" alt="David Miller" class="customer-img" />
+              <div class="customer-details">
+                <p>- Mispah</p>
+                <div class="rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                </div>
+              </div>
+            </div>
+            <p>"The frames are stylish but the delivery was a bit slow. However, the quality is great!"</p>
+          </div>
+      
+          <!-- Customer 4 -->
+          <div class="review-card">
+            <div class="customer-info">
+              <img src="prince.jpg" alt="Sarah Lee" class="customer-img" />
+              <div class="customer-details">
+                <p>- Prince</p>
+                <div class="rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9734;</span>
+                </div>
+              </div>
+            </div>
+            <p>"Very satisfied with my purchase. The frames look fantastic and the customer service is top-notch."</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Location -->
+      <section id="location" style="padding: 2rem 1rem; text-align: center;">
+        <h2 style="margin-bottom: 1rem;">Our Location</h2>
+        <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.592416020108!2d-1.6841526260049742!3d6.69729609329823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb9998d2004f49%3A0x459111bffee6e328!2sAkenten%20Appiah%20Menka%20University%20of%20Skills%20Training%20and%20Entrepreneurial%20Development!5e0!3m2!1sen!2sgh!4v1744048088269!5m2!1sen!2sgh"
+            width="100%"
+            height="100%"
+            style="position: absolute; top: 0; left: 0; border: 0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- footer section -->
+      <footer class="footer" id="foo">
+        <p class="llo"><strong>Brimx Frames</strong></p>
+        <p><em>Luxury Frames, Budget-Friendly Prices.</em></p>
+        <p>Email: <a href="mailto:mribrahimyusif@gmail.com" class="footer-link">mribrahimyusif@gmail.com</a></p>
+        <p>Phone: <a href="tel:+233240832129" class="footer-link">0240832129</a></p>
+        <p>Location: AAMUSTED Campus</p>
+        <p class="footer-rights">2025 Ibrahim Inc. All rights reserved.</p>
+      </footer>
+      
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
